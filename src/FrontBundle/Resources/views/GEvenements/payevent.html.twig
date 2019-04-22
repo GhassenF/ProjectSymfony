@@ -1,0 +1,32 @@
+{% extends "default/front.html.twig" %}
+{% block container %}
+    <div class="content container">
+        <div class="section-title-wrap">
+            <h3 class="section-title">Formulaire de Payement </h3>
+        </div>
+        <form method="POST" name="Form" type="submit" class="content container">
+            <p class="br-section-text">Payement des frais de l'événement sélectionné {{ id }}</p>
+            <div class="row">
+                <label class="col-sm-4 form-control-label">Numéro de la carte:</label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="text" class="form-control" placeholder="Entrer votre numéro de carte" name="num" required>
+                </div>
+            </div><!-- row -->
+            <div class="row mg-t-20">
+                <label class="col-sm-4 form-control-label">Code:</label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="text" class="form-control" placeholder="Entrer votre code" name="code" required>
+                </div>
+            </div>
+            <div align="right">
+            <button type="submit" class="btn btn-lg btn-color btn-button" href="{{ path('payer',{'Id':id}) }}">Valider</button>
+            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div></div>
+    </div>
+
+{% endblock %}

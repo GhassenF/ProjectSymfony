@@ -1,0 +1,60 @@
+{% extends "default/front.html.twig" %}
+{% block container %}
+    <div class="content container"><ul>
+    <div class="main-container" id="main-container">
+
+    <!-- Content -->
+    <section class="section-wrap pt-60 pb-20">
+    <div class="container">
+    <div class="row">
+
+    <!-- post content -->
+    <div class="col-md-8 blog__content mb-30">
+
+    <!-- standard post -->
+    <article class="entry">
+    {% for article in articles %}
+    <div class="single-post__entry-header  entry__header">
+
+        <h1 class="single-post__entry-title">
+            <a>{{article.titre}}</a>
+        </h1>
+
+        <ul class="single-post__entry-meta entry__meta">
+            <li>
+                <div class="entry-author">
+                    <a href="#" class="entry-author__url">
+                        <span>Organisé par:</span>
+                        <span class="entry-author__name">{{article.auteur}}</span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <span>le: </span>
+
+                <a>{{article.date|date('d-m-Y')}}</a>
+            </li>
+            <li>
+                <span> à :</span>
+                <a href="categories.html" class="entry__meta-category">{{article.journal}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="entry__article">
+        <p> {{ article.journal }}</p></div>
+
+
+
+    <div class="entry__article-holder">
+    <div class="entry__img-holder">
+        <figure>
+        </figure>
+    </div>
+    <div class="entry__article">
+        <span>Prix de participation :</span>
+        <p> {{ article.journal }} DT</p></div>
+    <div class="comment-form-submit">
+
+{% endfor %}
+
+{% endblock %}

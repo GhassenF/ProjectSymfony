@@ -1,0 +1,133 @@
+{% extends "default/back.html.twig" %}
+
+{% block container %}
+
+<head>
+
+</head>
+<tbody>
+<center>
+    <div class="card-body">
+        <h1 class="card-title">Listes des reclamations </h1>
+
+
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+
+                <h5>Recherche votre reclamation specifiée!!</h5>
+
+
+                <div class="sidebar-search">
+
+                    <div class="input-group custom-search-form">
+
+                        <input type="text" id="search" class="form-control" placeholder="Rechercher ici votre objet..">
+                    </div>
+                    <!-- /input-group -->
+                </div>
+
+                <ul class="nav" id="side-menu">
+                    <li>
+
+                        <ul class="nav nav-second-level" id="entitiesNav">
+                        </ul>
+                    </li>
+                </ul><br><br><br><br>
+
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+                <script type="text/javascript">
+                    jQuery(document).ready(function() {
+                        var searchRequest = null;
+                        $("#search").keyup(function() {
+                            var minlength = 1;
+                            var that = this;
+                            var value = $(this).val();
+                            var entitySelector = $("#entitiesNav").html('');
+                            if (value.length >= minlength ) {
+                                if (searchRequest != null)
+                                    searchRequest.abort();
+                                searchRequest = $.ajax({
+                                    type: "GET",
+                                    url: "{{ path('ajax_search') }}",
+                                    data: {
+                                        'q' : value
+                                    },
+                                    dataType: "text",
+                                    success: function(msg){
+                                        //we need to check if the value is the same
+                                        if (value===$(that).val()) {
+                                            var result = JSON.parse(msg);
+                                            $.each(result, function(key, arr) {
+                                                $.each(arr, function(idclaimev, value) {
+                                                    if (key === 'Claim') {
+                                                        if (idclaimev !== 'error') {
+                                                            console.log(value[1]);
+                                                            entitySelector.append('<li><b>'+value+'</b><a href="/show/'+idclaimev+'">'+'</a></li>');
+                                                        } else {
+                                                            entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                        }
+                                                    }
+                                                });
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    });
+                </script>
+
+
+        <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" ><a href="{{ path('claim_sort',{'sort':'ASC'}) }}" style="color: white">Trier par asc</a></button>
+        <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" >    <a href="{{ path('claim_sort',{'sort':'DESC'}) }}"style="color: white">Trier par DESC</a></button>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">ID Reclamation </th>
+                    <th scope="col">Nom Client</th>
+                    <th scope="col">Objet</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date reclamation</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Action</th>
+
+
+                </tr>
+                </thead>
+                {% for claim in claims %}
+                    <tr>
+                        <td>{{ claim.idclaimev }}</a></td>
+                        <td>{{ claim.idUser  }}</td>
+                        <td>{{ claim.object }}</td>
+                        <td>{{ claim.description }}</td>
+                        <td>{% if claim.claimdate %}{{ claim.claimdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+                        <td>{{ claim.statut }}</td>
+
+
+
+                        <td align="center">
+
+                            <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" > <a href="{{ path('claim_show', { 'idclaimev': claim.idclaimev }) }}" style="color: white">Visualiser</a></button>
+                            <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" id = "B"> <a href="{{ path('claim_block', { 'idclaimev': claim.idclaimev }) }}" style="color: white">Bloquer</a></button>
+                            <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" > <a href="{{ path('claim_deblock', { 'idclaimev': claim.idclaimev }) }}" style="color: white">Débloquer</a></button>
+
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="navigation">
+                {{ knp_pagination_render(claims) }}
+            </div>
+        </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+            {% endblock %}

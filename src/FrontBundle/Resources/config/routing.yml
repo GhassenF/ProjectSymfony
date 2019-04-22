@@ -1,0 +1,185 @@
+front_homepage:
+    path:     /
+    defaults: { _controller: FrontBundle:Default:index }
+
+navArtIA:
+    path:     /artia
+    defaults: { _controller: FrontBundle:ArticleFront:artIA }
+
+articleDetails:
+    path:     /{id}/artDetails
+    defaults: { _controller: FrontBundle:ArticleFront:articleDetails }
+    methods:  [GET , POST]
+
+deleteComment:
+    path: /{id}/delete
+    defaults: { _controller: FrontBundle:ArticleFront:delete }
+
+deleteCommentev:
+    path: /{id}/deletev
+    defaults: { _controller: FrontBundle:Evenement:delete }
+
+
+
+
+
+
+navArtRob:
+    path:     /artrob
+    defaults: { _controller: FrontBundle:ArticleFront:artRob }
+
+navEventEvenement:
+    path:     /eventEvenement
+    defaults: { _controller: FrontBundle:Navigation:eventEvenement }
+
+navEventConf:
+    path:     /eventconf
+    defaults: { _controller: FrontBundle:Navigation:eventConf }
+
+navEventComp:
+    path:     /eventcomp
+    defaults: { _controller: FrontBundle:Navigation:eventComp }
+
+navForBI:
+    path:     /forbi
+    defaults: { _controller: FrontBundle:FormationFront:forBI }
+
+
+navForDS:
+    path:     /fords
+    defaults: { _controller: FrontBundle:FormationFront:forDS }
+
+navForIA:
+    path:     /foria
+    defaults: { _controller: FrontBundle:FormationFront:forIA }
+
+
+navForRec:
+    path:     /forrec
+    defaults: { _controller: FrontBundle:ClaimevFront:forRec }
+
+
+claim_ev:
+    resource: "@FrontBundle/Resources/config/routing/claim.yml"
+    prefix:   /claim
+
+profile:
+    path: /Profil
+    defaults: { _controller: FrontBundle:Profile:showProfile }
+
+navAjoutEvent:
+    path:     /ajoutEvent
+    defaults: { _controller: FrontBundle:Evenement:addEvent }
+
+navAffichageEvent:
+    path:    /affichageEvent
+    defaults: { _controller: FrontBundle:Evenement:listeEvent }
+
+navSuppressionEvent:
+    path:    /suppressionEvent
+    defaults: { _controller: FrontBundle:Evenement:deleteEvent }
+
+navModificationEvent:
+    path:    /modifEvent
+    defaults: { _controller: FrontBundle:Evenement:updateEvent }
+
+navShowOneEvent:
+    path:       /{id}/oneEvent
+    defaults: { _controller: FrontBundle:Evenement:oneEvent }
+
+navPartEvent:
+    path:    /partEvent
+    defaults: { _controller: FrontBundle:Evenement:participantEvent }
+
+navPayEvent:
+    path:    /payEvent
+    defaults: { _controller: FrontBundle:Evenement:payEvent }
+testpayement:
+    path: /payement/{numCarte}
+    defaults: { _controller: FrontBundle:Evenement:testerpayement }
+payer:
+    path:     /payementval
+    defaults: { _controller: FrontBundle:Evenement:pay }
+
+
+
+
+navForRob:
+    path:     /forrob
+    defaults: { _controller: FrontBundle:FormationFront:forRob }
+navAjoutFor:
+    path:     /ajoutFor
+    defaults: { _controller: FrontBundle:FormationFront:addFor }
+modifierFor:
+    path:     /ModifierFor/{id}
+    defaults: { _controller: FrontBundle:FormationFront:ModifierFor }
+SupprimerFor:
+    path:     /SupprimerFor/{id}
+    defaults: { _controller: FrontBundle:FormationFront:supprimerFor }
+
+ajax_search:
+    path:     /searchF
+    defaults: { _controller: FrontBundle:FormationFront:search }
+
+participerFor:
+    path:     /participer
+    defaults: { _controller: FrontBundle:FormationFront:participerFor }
+
+
+actualitefrontaffichage:
+    path:     /actualiteaffich
+    defaults: { _controller: FrontBundle:Actualitefront:affichagedesactualite }
+consulteractualiteinfront:
+    path: /consulteractualite/{id}
+    defaults: { _controller: FrontBundle:Actualitefront:consulteractualiteinfront }
+testreviewplacement:
+    path: /testerr
+    defaults: { _controller: FrontBundle:Actualitefront:testreview }
+affichageactualiteparevent:
+    path: /affichageevent
+    defaults: {  _controller: FrontBundle:Actualitefront:affichageparevent }
+actualiteajoutetab:
+    path: /ajouterActualitefr
+    defaults: {  _controller: FrontBundle:Actualitefront:ajoutactualitefront }
+actualiteajouterparetab:
+    path: /list
+    defaults: {  _controller: FrontBundle:Actualitefront:affichageetabco }
+modifieractualtetab:
+    path:     /listmodif/{id}
+    defaults: { _controller: FrontBundle:Actualitefront:modifieractetab }
+supprimeractualtetab:
+    path: /supprimerActetab/{id}
+    defaults: { _controller: FrontBundle:Actualitefront:suppactetab }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+navAjoutArticleFront:
+    path:       /artaddfront
+    defaults: { _controller: FrontBundle:ArticleFront:addarticlef }
+
+navAfficherArticleFront:
+    path:       /artlistfront
+    defaults: { _controller: FrontBundle:ArticleFront:afficherFront }
+
+navModifierArticleFront:
+    path:       /artmodifront
+    defaults: { _controller: FrontBundle:ArticleFront:modifierFront }
+
+navSupprimerArticleFront:
+    path:       /artdeletefront
+    defaults: { _controller: FrontBundle:ArticleFront:supprimerFront }
+
+navShowOneArt:
+    path:       /artshowonefront
+    defaults: { _controller: FrontBundle:ArticleFront:pdf }

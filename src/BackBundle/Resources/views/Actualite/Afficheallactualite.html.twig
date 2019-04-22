@@ -1,0 +1,39 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+    <h1 class="card-title mt-2">Liste des Actualités Ajouter par les Etablisements </h1>
+
+<table class="table table-bordered table-colored table-dark">
+    <thead>
+    <tr>
+        <th class="wd-10p">ID</th>
+        <th class="wd-35p">Date</th>
+        <th class="wd-35p">Titre</th>
+        <th class="wd-35p">Description</th>
+        <th class="wd-20p">Categories</th>
+        <th class="wd-20p">Utilisateur</th>
+        <th class="wd-20p">Nombre de jaime</th>
+        <th class="wd-20p">Image</th>
+        <th class="wd-20p">Outil</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for actualite in Actualite %}
+    <tr>
+        <th scope="row">{{ actualite.id }}</th>
+        <td>{{ actualite.date|date('Y-m-d') }}</td>
+        <td>{{ actualite.titre }}</td>
+        <td>{{ actualite.description }}</td>
+        <td>{{ actualite.categories }}</td>
+        <td>{{ actualite.user }}</td>
+        <td>{{ actualite.nbrelike }}</td>
+        <td><img src="{{ asset('img/' ~ actualite.pictures) }}" width="200px" height="200px" ></td>
+        <td><button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" >   <a href="{{ path('consultactualite',{'id':actualite.id } ) }}" style="color: white"> Consulter </a></button>
+            <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" >   <a href="{{ path('ArchiverActualite',{'id':actualite.id } ) }}"style="color: white"> Archiver </a></button> </td>
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

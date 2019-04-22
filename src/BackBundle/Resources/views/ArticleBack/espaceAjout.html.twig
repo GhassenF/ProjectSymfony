@@ -1,0 +1,43 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+
+    <form name="faj" method="post" type="submit" enctype="multipart/form-data">
+
+        <div class="form-layout form-layout-4">
+            <p class="mg-b-30 tx-gray-600">Ajouter votre article</p>
+            <div class="row">
+                <label class="col-sm-4 form-control-label">Auteur: <span class="tx-danger">*</span></label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="text" class="form-control" placeholder="Entrer le nom de l'auteur" name="auteur"
+                           required>
+                </div>
+            </div><!-- row -->
+            <div class="row mg-t-20">
+                <label class="col-sm-4 form-control-label">Journal: <span class="tx-danger">*</span></label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="text" class="form-control" placeholder="Entrer le nom du journal" name="journal"
+                           required>
+                </div>
+            </div>
+            <div class="row mg-t-20">
+                <label class="col-sm-4 form-control-label">Titre: <span class="tx-danger">*</span></label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="text" class="form-control" placeholder="Entrer titre" name="titre" required>
+                </div>
+            </div>
+            <div class="row mg-t-20">
+                <label class="col-sm-4 form-control-label">Fichier PDF de l'article: <span
+                            class="tx-danger">*</span></label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="file" name="pathfile" required>
+                </div>
+            </div>
+            <div class="form-layout-footer mg-t-30">
+                <button class="btn btn-info" type="submit" value="Ajouter">Valider</button>
+                <button class="btn btn-secondary" type="reset" value="Annuler">Annuler</button>
+            </div><!-- form-layout-footer -->
+        </div>
+    </form>
+
+
+{% endblock %}

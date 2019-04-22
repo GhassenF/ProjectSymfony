@@ -1,0 +1,33 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+    <table class="table table-bordered table-colored table-purple">
+
+        <th class="wd-20p">IdArticle</th>
+        <th class="wd-10p">IdUSer</th>
+        <th class="wd-35p">Auteur</th>
+        <th class="wd-35p">Journal</th>
+        <th class="wd-20p">Titre</th>
+        <th class="wd-20p">Date</th>
+        <th class="wd-20p">Nombre Des Vues</th>
+        <th class="wd-20p">Rating</th>
+        <th class="wd-20p">Emplacement</th>
+
+
+        {% for article in Articles %}
+
+        <tbody>
+        <tr>
+            <td >{{ article.identifiant }}</td>
+            <td>{{ article.identifiantuser }}</td>
+            <td>{{ article.auteur }}</td>
+            <td>{{ article.journal }}</td>
+            <td>{{ article.titre }}</td>
+            <td>{{ article.date|date('Y-m-d') }}</td>
+            <td>{{ article.Statarticle.nbrvue}}</td>
+            <td>{{ article.Statarticle.score}}</td>
+            <td>{{ article.emplacement }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

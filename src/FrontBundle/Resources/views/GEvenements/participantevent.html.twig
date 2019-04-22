@@ -1,0 +1,51 @@
+{% extends "default/front.html.twig" %}
+{% block container %}
+    <div class="content container">
+        <div class="section-title-wrap">
+            <h3 class="section-title">Formulaire de Participation</h3>
+        </div>
+        <form method="POST" name="Form" type="submit" class="content container">
+
+            <p class="br-section-text">Ajouter vos informations pour participer à votre événement préféré</p>
+            <div class="row">
+                <label class="col-sm-4 form-control-label">Nom:</label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="text" class="form-control" placeholder="Entrer votre nom" name="nom" required>
+                </div>
+            </div><!-- row -->
+            <div class="row mg-t-20">
+                <label class="col-sm-4 form-control-label">Prénom:</label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="text" class="form-control" placeholder="Entrer votre prénom" name="prenom" required>
+                </div>
+            </div>
+            <div class="row mg-t-20">
+                <label class="col-sm-4 form-control-label">Email:</label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="text" class="form-control" placeholder="Entrer votre addresse mail" name="mail" required>
+                </div>
+            </div>
+            <div class="row mg-t-20">
+                <label class="col-sm-4 form-control-label">CIN:</label>
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="text" class="form-control" placeholder="Entrer votre numéro de CIN" name="cin" required>
+                </div>
+            </div>
+            <div class="row mg-t-20">
+                <label class="col-sm-4 form-control-label">N° Téléphone:</label>
+
+                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <input type="text" class="form-control" placeholder="Enter votre numéro de téléphone" name="tlph" aria-required="true" d>
+                </div>
+            </div>
+            <div class="form-layout-footer mg-t-30" align="right">
+
+                <input type="submit" value="Valider" class="btn btn-lg btn-color btn-button" id="paybtn" href="{{ path('navPayEvent') }}">
+
+
+            </div>
+        </form><!-- form-layout-footer -->
+
+
+    </div>
+{% endblock %}

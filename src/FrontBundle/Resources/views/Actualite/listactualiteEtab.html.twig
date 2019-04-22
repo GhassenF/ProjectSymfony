@@ -1,0 +1,55 @@
+{% extends "default/front.html.twig" %}
+{% block container %}
+    <section class="featured-posts-masonry">
+    <div class="container">
+    <div class="container text-center">
+        <h1 class="mb-30">Votre liste d'actualite  </h1>
+    </div>
+    <hr>
+    <div class="row">
+    {% for actualite in actualiteetab %}
+        <div class="col-md-4 col-sm-6">
+            <article class="entry">
+                <div class="entry__header">
+                    <h2 class="entry__title">
+                        <a href="{{ path('consulteractualiteinfront',{'id':actualite.id } ) }}">{{ actualite.titre }}</a>
+                    </h2>
+                </div>
+                <div class="entry__img-holder">
+                    <a href="#">
+                        <div  href="{{ path('consulteractualiteinfront',{'id':actualite.id } ) }}"  class="thumb-container">
+                            <img  data-src="{{ asset('img/' ~ actualite.pictures) }}" src="{{ asset('img/' ~ actualite.pictures) }}" class="entry__img lazyload" alt="" width="290px" height="207px"/>
+
+                        </div>
+                    </a>
+                </div>
+
+                <div class="entry__body">
+                    <div class="entry__header">
+                        <a href="#" class="entry__meta-category">{{ actualite.categories }}</a>
+                        <ul class="entry__meta">
+                            <li class="entry__meta-date">
+                                {{ actualite.date|date('Y-m-d') }}
+                            </li>
+                            <li class="entry-author__name">
+                                {{ actualite.user }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="entry__excerpt">
+                        <p>{{ actualite.description }}</p>
+                    </div>
+                    <td><button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" >   <a href="{{ path('modifieractualtetab',{'id':actualite.id } ) }}" style="color: white"> Modifier </a></button>
+                        <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" >   <a href="{{ path('supprimeractualtetab',{'id':actualite.id } ) }}"style="color: white"> Supprimer </a></button>
+
+                    </td>
+                </div>
+            </article>
+        </div>
+    {% endfor %}
+
+</div>
+    </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+claim_new:
+    path:     /new
+    defaults: { _controller: "FrontBundle:ClaimevFront:new" }
+    methods:  [GET, POST]
+
+claim_show:
+    path:     /{idclaimev}/show
+    defaults: { _controller: "BackBundle:ClaimevBack:show" }
+    methods:  GET
+
+
+claim_block:
+    path:     /{idclaimev}/block
+    defaults: { _controller: "BackBundle:ClaimevBack:block" }
+    methods:  GET
+
+claim_deblock:
+    path:     /{idclaimev}/deblock
+    defaults: { _controller: "BackBundle:ClaimevBack:deblock" }
+    methods:  GET
+
+
+
+
+
+claim_index:
+    path:     /
+    defaults: { _controller: "BackBundle:ClaimevBack:index" }
+    methods:  GET
+
+claim_sort:
+    path:     /sort/{sort}
+    defaults: { _controller: "BackBundle:ClaimevBack:sort" }
+    methods:  GET
+
+
+
+claim_approve:
+    path:     /{idclaimev}/approve
+    defaults: { _controller: "BackBundle:ClaimevBack:approve" }
+    methods:  [GET, POST]
+
+claim_ignore:
+    path:     /{idclaimev}/ignore
+    defaults: { _controller: "BackBundle:ClaimevBack:ignore" }
+    methods:  [GET, POST]

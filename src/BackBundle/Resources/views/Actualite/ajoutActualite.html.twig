@@ -1,0 +1,51 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+
+
+    <h3 class="card-title mt-2">Ajouter Une Nouvelle Actualité</h3>
+    {{ form_start(form) }}
+
+    <div class="row">
+
+
+        <div class="card-body">
+
+
+
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label for="inputname" class="control-label col-form-label">Titre</label>
+                        {{ form_widget(form.titre,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label for="inputname" class="control-label col-form-label">Categorie</label>
+                        {{ form_widget(form.categories,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6" type="description">
+                    <div class="form-group">
+                        <label for="inputname" class="control-label col-form-label">Description</label>
+                        {{ form_widget(form.description,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                </div>
+
+
+
+
+
+                {{form_widget(form)}}
+
+            </div>
+            <div class="buttons">
+                <div class="pull-right">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

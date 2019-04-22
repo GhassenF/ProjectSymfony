@@ -1,0 +1,42 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+
+    <table class="table table-bordered table-colored table-purple">
+        <th class="wd-10p">IdUSer</th>
+        <th class="wd-10p">Auteur</th>
+        <th class="wd-10p">Journal</th>
+        <th >Titre</th>
+        <th>Date</th>
+        <th>Nombre Des Vues</th>
+
+        <th>Suppression</th>
+        <th>Modification</th>
+        <th>Archifage</th>
+        <th>Consultation</th>
+
+        {% for article in Articles %}
+
+        <body>
+        <tr>
+
+            <td>{{ article.identifiantuser }}</td>
+            <td>{{ article.auteur }}</td>
+            <td>{{ article.journal }}</td>
+            <td>{{ article.titre }}</td>
+            <td>{{ article.date|date('Y-m-d') }}</td>
+            <td>{{ article.Statarticle.nbrvue}}</td>
+
+            <td ><a  href="{{ path('deleteArticle',{'Id':article.identifiant}) }}">Supprimer</a></td>
+            <td><a href="{{ path('updateArticle',{'Id':article.identifiant}) }}">Modifier</a></td>
+            <td ><a  href="{{ path('archiverArticle',{'Id':article.identifiant}) }}">Archiver</a></td>
+            <td><a href="{{ path('pdfviw',{'Id':article.Statarticle.idart,'em':article.emplacement}) }}">Consulter</a></td>
+        </tr>
+        {% endfor %}
+
+        </body>
+
+    </table>
+    <a href="{{ path('navAddArticle') }}">Ajouter un article</a>
+
+
+{% endblock %}

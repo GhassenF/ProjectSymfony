@@ -1,0 +1,59 @@
+{% extends "default/front.html.twig" %}
+{% block container %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- Contact -->
+    <section class="section-wrap pt-40 pb-40">
+        <div class="container">
+
+            <h1 class="page-title" style="margin-left: 100px; color: #3E7087;">Formulaire de participation </h1>
+
+            <!-- Contact Form -->
+
+            <div class="contact-name">
+                {{ form_start(form) }}
+                <label for="titre">Prenom <abbr title="required" class="required">*</abbr></label>
+                {{ form_widget(form.prenom) }}
+            </div>
+
+            <div class="contact-name">
+                <label for="titre">nom <abbr title="required" class="required">*</abbr></label>
+                {{ form_widget(form.nom) }}
+            </div>
+
+            <div class="contact-name">
+                <label for="titre">Mail <abbr title="required" class="required">*</abbr></label>
+                {{ form_widget(form.mail) }}
+            </div>
+
+            <div class="nom-etablissement">
+                <label for="etablissement">CIN <abbr title="required" class="required">*</abbr></label>
+                {{ form_widget(form.cin) }}
+            </div>
+            <div class="contact-message">
+                <label for="description">Adresse <abbr title="required" class="required">*</abbr></label>
+
+                {{ form_widget(form.adresse) }}
+            </div>
+
+            <div class="contact-subject">
+                <label for="date_debut">Numéro de téléphone</label>
+                {{ form_widget(form.numtelephone) }}
+            </div>
+
+
+            <div class="row justify-content-md-center">
+                <div class="col-lg-8">
+                    <p>Merci de vérifier vos champs avant de valider. </p>
+                </div>
+            </div>
+            {{ form_widget(form.save, { 'label': 'Valider' }) }}
+
+
+            {{ form_end(form) }}
+
+        </div>
+
+    </section> <!-- end contact -->
+{% endblock %}

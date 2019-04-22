@@ -1,0 +1,32 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+    <div class="container">
+    <div class="content-container">
+    <h3 class="card-title mt-2">Liste des participants</h3>
+    <table class="table table-bordered table-colored table-purple">
+
+        <th class="wd-20p">Nom</th>
+        <th class="wd-10p">Prénom</th>
+        <th class="wd-35p">N° CIN</th>
+        <th class="wd-35p">Mail</th>
+        <th class="wd-20p">N° Téléphone</th>
+        <th class="wd-20p">Suppression</th>
+
+
+        {% for participant in participants %}
+        <tbody>
+        <tr>
+            <td>{{ participant.nom }}</td>
+            <td>{{ participant.prenom }}</td>
+            <td>{{ participant.cin }}</td>
+            <td>{{ participant.mail }}</td>
+            <td>{{ participant.tlph }}</td>
+
+            <td><a href="{{ path('navDeletePart',{'id':participant.cin}) }}">Supprimer</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+{% endblock %}

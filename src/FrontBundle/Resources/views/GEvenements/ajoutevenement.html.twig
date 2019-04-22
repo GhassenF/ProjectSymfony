@@ -1,0 +1,293 @@
+{% extends "default/front.html.twig" %}
+{% block container %}
+    <div class="content">
+    <div class="content-container">
+        <h3 class="card-title mt-2">Ajouter Un événement</h3>
+        {{ form_start(form) }}
+
+        <div class="row">
+
+
+            <div class="card-body">
+
+
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <label for="inputname" class="control-label col-form-label">Titre</label>
+                            {{ form_widget(form.title,{'attr':{'class':'form-control'}} ) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <label for="inputname" class="control-label col-form-label">Categorie</label>
+                            {{ form_widget(form.category,{'attr':{'class':'form-control'}} ) }}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6" type="description">
+                        <div class="form-group">
+                            <label for="inputname" class="control-label col-form-label">Description</label>
+                            {{ form_widget(form.description,{'attr':{'class':'form-control'}} ) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6" type="etablissement">
+                        <div class="form-group">
+                            <label for="inputname" class="control-label col-form-label">Etablissement</label>
+                            {{ form_widget(form.etablissement,{'attr':{'class':'form-control'}} ) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6" type="prix">
+                        <div class="form-group">
+                            <label for="inputname" class="control-label col-form-label">Prix</label>
+                            {{ form_widget(form.prix,{'attr':{'class':'form-control'}} ) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6" type="imagepath">
+                        <div class="form-group">
+                            <label for="inputname" class="control-label col-form-label">Image</label>
+                            {{ form_widget(form.imagepath,{'attr':{'class':'form-control'}} ) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6" type="date">
+                        <div class="">
+                            <label for="inputname" class="control-label col-form-label">Date</label>
+                            <input type="date" class="control-label col-form-label" name="Date">
+
+                        </div>
+                    </div>
+
+                    {{form_widget(form)}}
+
+                </div>
+
+
+                <div id="map" hidden="false"></div>
+                <div id="infowindow-content" hidden="false">
+                    <img src="" width="16" height="16" id="place-icon">
+                    <span id="place-name"  class="title"></span><br>
+                    <span id="place-address"></span>
+                </div>
+
+                <script>
+                    // This example requires the Places library. Include the libraries=places
+                    // parameter when you first load the API. For example:
+                    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+                    function initMap() {
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            center: {lat: -33.8688, lng: 151.2195},
+                            zoom: 13
+                        });
+                        var card = document.getElementById('pac-card');
+                        var input = document.getElementById('appbundle_event_localisation');
+                        var types = document.getElementById('type-selector');
+                        var strictBounds = document.getElementById('strict-bounds-selector');
+
+
+                        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
+                        /* */     var autocomplete = new google.maps.places.Autocomplete(input);
+                        var autocomplete1 = new google.maps.places.Autocomplete(input1);
+
+                        // Bind the map's bounds (viewport) property to the autocomplete object,
+                        // so that the autocomplete requests use the current map bounds for the
+                        // bounds option in the request.
+                        autocomplete.bindTo('bounds', map);
+
+                        // Set the data fields to return when the user selects a place.
+                        autocomplete.setFields(
+                            ['address_components', 'geometry', 'icon', 'name']);/**/
+                        var infowindow = new google.maps.InfoWindow();
+                        var infowindowContent = document.getElementById('infowindow-content');
+                        infowindow.setContent(infowindowContent);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            anchorPoint: new google.maps.Point(0, -29)
+                        });
+
+                        autocomplete.addListener('place_changed', function() {
+                            infowindow.close();
+                            marker.setVisible(false);
+                            var place = autocomplete.getPlace();
+                            //console.log("azeazesqd "+place.geometry.location.lat())
+                            //  document.getElementById('appbundle_livraison_latitudeSource').value = place.geometry.location.lat()
+                            //  document.getElementById('appbundle_livraison_longitudeSource').value = place.geometry.location.lng()
+
+
+                            if (!place.geometry) {
+                                // User entered the name of a Place that was not suggested and
+                                // pressed the Enter key, or the Place Details request failed.
+                                window.alert("No details available for input: '" + place.name + "'");
+                                return;
+                            }
+
+                            // If the place has a geometry, then present it on a map.
+                            if (place.geometry.viewport) {
+                                map.fitBounds(place.geometry.viewport);
+                            } else {
+                                map.setCenter(place.geometry.location);
+                                map.setZoom(17);  // Why 17? Because it looks good.
+                            }
+                            marker.setPosition(place.geometry.location);
+                            marker.setVisible(true);
+
+                            var address = '';
+                            if (place.address_components) {
+                                address = [
+                                    (place.address_components[0] && place.address_components[0].short_name || ''),
+                                    (place.address_components[1] && place.address_components[1].short_name || ''),
+                                    (place.address_components[2] && place.address_components[2].short_name || '')
+                                ].join(' ');
+                            }
+
+                            infowindowContent.children['place-icon'].src = place.icon;
+                            infowindowContent.children['place-name'].textContent = place.name;
+                            infowindowContent.children['place-address'].textContent = address;
+                            infowindow.open(map, marker);
+                        });
+                        autocomplete1.addListener('place_changed', function() {
+                            infowindow.close();
+                            marker.setVisible(false);
+                            var place = autocomplete1.getPlace();
+                            //console.log("azeazesqd "+place.geometry.location.lat())
+                            document.getElementById('appbundle_event_localisation').value = place.geometry.location();
+                            //      document.getElementById('appbundle_livraison_longitudeDestination').value = place.geometry.location.lng()
+
+
+                            if (!place.geometry) {
+                                // User entered the name of a Place that was not suggested and
+                                // pressed the Enter key, or the Place Details request failed.
+                                window.alert("No details available for input: '" + place.name + "'");
+                                return;
+                            }
+
+                            // If the place has a geometry, then present it on a map.
+                            if (place.geometry.viewport) {
+                                map.fitBounds(place.geometry.viewport);
+                            } else {
+                                map.setCenter(place.geometry.location);
+                                map.setZoom(17);  // Why 17? Because it looks good.
+                            }
+                            marker.setPosition(place.geometry.location);
+                            marker.setVisible(true);
+                            var address = '';
+                            if (place.address_components) {
+                                address = [
+                                    (place.address_components[0] && place.address_components[0].short_name || ''),
+                                    (place.address_components[1] && place.address_components[1].short_name || ''),
+                                    (place.address_components[2] && place.address_components[2].short_name || '')
+                                ].join(' ');
+                            }
+                            // console.log(Distance(36.396191,10.614120,36.806496,10.181532))
+                            //    document.getElementById('appbundle_livraison_distancelivraison').value=Distance(
+                            //       parseFloat(document.getElementById('appbundle_livraison_latitudeSource').value),
+                            //     parseFloat(document.getElementById('appbundle_livraison_longitudeSource').value),
+                            //    parseFloat(document.getElementById('appbundle_livraison_latitudeDestination').value),
+                            //    parseFloat(document.getElementById('appbundle_livraison_longitudeDestination').value ));
+
+
+
+
+
+                            {#var x = parseInt({{ prix }} * Distance(parseFloat(document.getElementById('appbundle_livraison_latitudeSource').value), parseFloat(document.getElementById('appbundle_livraison_longitudeSource').value),parseFloat(document.getElementById('appbundle_livraison_latitudeDestination').value),parseFloat(document.getElementById('appbundle_livraison_longitudeDestination').value )));#}
+
+                            {#moy(x);#}
+                            // console.log(parseFloat(document.getElementById('appbundle_livraison_latitudeSource').value))
+                            infowindowContent.children['place-icon'].src = place.icon;
+                            infowindowContent.children['place-name'].textContent = place.name;
+                            infowindowContent.children['place-address'].textContent = address;
+                            infowindow.open(map, marker);
+                        });
+
+                        // Sets a listener on a radio button to change the filter type on Places
+                        // Autocomplete.
+                        function setupClickListener(id, types) {
+                            var radioButton = document.getElementById(id);
+                            radioButton.addEventListener('click', function() {
+                                autocomplete.setTypes(types);
+                            });
+                        }
+
+                        setupClickListener('changetype-all', []);
+                        setupClickListener('changetype-address', ['address']);
+                        setupClickListener('changetype-establishment', ['establishment']);
+                        setupClickListener('changetype-geocode', ['geocode']);
+
+                        document.getElementById('use-strict-bounds')
+                            .addEventListener('click', function() {
+                                console.log('Checkbox clicked! New state=' + this.checked);
+                                autocomplete.setOptions({strictBounds: this.checked});
+                            });
+                    }
+
+
+
+
+                    // function distance($lat1, $lng1, $lat2, $lng2, $unit = 'k') {
+                    //     $earth_radius = 6378137;   // Terre = sphère de 6378km de rayon
+                    //     $rlo1 = deg2rad($lng1);
+                    //     $rla1 = deg2rad($lat1);
+                    //     $rlo2 = deg2rad($lng2);
+                    //     $rla2 = deg2rad($lat2);
+                    //     $dlo = ($rlo2 - $rlo1) / 2;
+                    //     $dla = ($rla2 - $rla1) / 2;
+                    //     $a = (sin($dla) * sin($dla)) + cos($rla1) * cos($rla2) * (sin($dlo) * sin($dlo));
+                    //     $d = 2 * atan2(sqrt($a), sqrt(1 - $a));
+                    //     //
+                    //     $meter = ($earth_radius * $d);
+                    //     if ($unit == 'k') {
+                    //         return $meter / 1000;
+                    //     }
+                    //     return $meter;
+                    // }
+
+                    function convertRad(input){
+                        return (Math.PI * input)/180;
+                    }
+
+                    console.log(Distance(parseFloat(document.getElementById('appbundle_livraison_latitudeSource')), parseFloat(document.getElementById('appbundle_livraison_longitudeSource')),parseFloat(document.getElementById('appbundle_livraison_latitudeDestination')),parseFloat(document.getElementById('appbundle_livraison_longitudeDestination') )));
+
+                    /*  function ss(appbundle_livraison_latitudeSource, appbundle_livraison_longitudeSource, appbundle_livraison_latitudeDestination, appbundle_livraison_longitudeDestination){
+
+                          R = 6378000 //Rayon de la terre en mètre
+
+                          lat_a = convertRad(appbundle_livraison_latitudeSource);
+                          lon_a = convertRad(appbundle_livraison_longitudeSource);
+                          lat_b = convertRad(appbundle_livraison_latitudeDestination);
+                          lon_b = convertRad(appbundle_livraison_longitudeDestination);
+
+                          d = R * (Math.PI/2 - Math.asin( Math.sin(lat_b) * Math.sin(lat_a) + Math.cos(lon_b - lon_a) * Math.cos(lat_b) * Math.cos(lat_a)))
+
+                          return d;
+                      }*/
+
+
+
+
+                </script>
+
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHNR3vAW0ePVGSFhG8ABlI5LIbAHo_5FY&fbclid=IwAR2aEAzW3rxWmB4hh5Fu74bJQ3roda6Z4-f8O45jINB3z7rasfCeXhS4Qu8&libraries=places&callback=initMap"
+                        async defer></script>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    <div class="buttons">
+        <div class="pull-right" align="right">
+            <input type="submit" value="Valider" class="btn btn-md btn-color btn-button" />
+            <input type="reset" value="Annuler" class="btn btn-md btn-color btn-button" />
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    {{ form_end(form) }}
+    </div>
+{% endblock %}

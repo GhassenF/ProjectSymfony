@@ -1,0 +1,96 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Membres
+ *
+ * @ORM\Table(name="membres")
+ * @ORM\Entity
+ */
+class Membres
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=20, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=20, nullable=false)
+     */
+    private $prenom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=20, nullable=false)
+     */
+    private $username;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=100, nullable=false)
+     */
+    private $mail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mot_de_passe", type="string", length=20, nullable=false)
+     */
+    private $motDePasse;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date_naissance", type="string", length=20, nullable=false)
+     */
+    private $dateNaissance;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="localisation", type="string", length=20, nullable=false)
+     */
+    private $localisation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="num_tel", type="string", length=20, nullable=false)
+     */
+    private $numTel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="categories", type="string", length=20, nullable=false)
+     */
+    private $categories;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="string", length=200, nullable=false)
+     */
+    private $photo;
+
+
+}
+

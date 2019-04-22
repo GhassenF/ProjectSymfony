@@ -1,0 +1,62 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+
+    <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
+        <h4 class="tx-gray-800 mg-b-5">Veuillez modifier cette formation</h4>
+
+    </div>
+
+    <div class="br-pagebody">
+    <div class="br-section-wrapper">
+        {{ form_start(Form) }}
+
+        <div class="form-layout form-layout-1">
+            <div class="row mg-b-25">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Titre: <span class="tx-danger">*</span></label>
+                        {{ form_widget(Form.titre,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Etablissement: <span class="tx-danger">*</span></label>
+                        {{ form_widget(Form.etablissement,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Description: <span class="tx-danger">*</span></label>
+                        {{ form_widget(Form.description,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+
+                </div><!-- col-4 -->
+                <div class="col-lg-8">
+                    <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">Date de début: <span class="tx-danger">*</span></label>
+                        {{ form_widget(Form.dateDebut) }}
+                    </div>
+                </div><!-- col-8 -->
+
+                <div class="col-lg-8">
+                    <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">Date fin: <span class="tx-danger">*</span></label>
+                        {{ form_widget(Form.dateFin) }}
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">Prix: <span class="tx-danger">*</span></label>
+                        {{ form_widget(Form.prix) }}
+                    </div>
+                </div>
+
+            </div><!-- row -->
+        </div>
+        {{ form_end(Form) }}
+    </div>
+
+{% endblock %}

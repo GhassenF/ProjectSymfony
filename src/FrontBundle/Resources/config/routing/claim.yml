@@ -1,0 +1,9 @@
+claim_new:
+    path:     /new
+    defaults: { _controller: "FrontBundle:ClaimevFront:new" }
+    methods:  [GET, POST]
+
+claim_delete:
+    path:     /{idclaim}/delete
+    defaults: { _controller: "FrontBundle:Claim:delete" }
+    methods:  DELETE

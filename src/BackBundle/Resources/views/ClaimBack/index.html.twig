@@ -1,0 +1,74 @@
+{% extends "default/back.html.twig" %}
+
+{% block container %}
+<title>Event</title>
+</head>
+<body>
+<center>
+    <div class="card-body">
+        <h4 class="card-title">Claim List</h4>
+
+        ////////////////////////////////////////////////////
+
+        <body>
+        <div class="sidebar-search">
+            <div class="input-group custom-search-form">
+                <input type="text" id="search" class="form-control" placeholder="Suche...">
+            </div>
+            <!-- /input-group -->
+        </div>
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="#"> Entities<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" id="entitiesNav">
+                </ul>
+            </li>
+        </ul>
+        </body>
+        /////////////////////////////////////////////////
+        <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" ><a href="{{ path('claim_sort',{'sort':'ASC'}) }}" style="color: white">Sort By ASC</a></button>
+        <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" >    <a href="{{ path('claim_sort',{'sort':'DESC'}) }}"style="color: white">Sort By DESC</a></button>        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Claim ID</th>
+                    <th scope="col">Client ID</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Claim Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+
+
+
+
+
+
+                </tr>
+                </thead>
+                {% for claim in claims %}
+                    <tr>
+                        <td><a href="{{ path('claim_show', { 'idclaim': claim.idclaimev }) }}">{{ claim.idclaimev }}</a></td>
+                        <td>{{ claim.idUser  }}</td>
+                        <td>{{ claim.object }}</td>
+                        <td>{{ claim.description }}</td>
+                        <td>{% if claim.claimdate %}{{ claim.claimdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+                        <td>{{ claim.statut }}</td>
+
+                        <td align="center">
+
+                            <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" > <a href="{{ path('claim_show', { 'idclaim': claim.idclaimev }) }}" style="color: white">Show</a></button>
+
+
+
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+
+            {% endblock %}

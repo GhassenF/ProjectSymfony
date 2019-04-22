@@ -1,0 +1,42 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+    <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-t-80 mg-b-10">La liste des formations</h6>
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="thead-colored thead-primary">
+
+            <tr>
+                <th class="wd-20p">Titre</th>
+                <th class="wd-20p">Etablissement</th>
+                <th class="wd-20p">Desciption</th>
+                <th class="wd-20p">Date de début</th>
+                <th class="wd-20p">Date de fin</th>
+                <th class="wd-20p">prix</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for formation in formations %}
+            <tr>
+
+                <td>{{ formation.titre }}</td>
+                <td>{{ formation.etablissement }}</td>
+                <td>{{ formation.description }}</td>
+                <td>{{ formation.dateDebut|date('d-m-y') }}</td>
+                <td>{{ formation.dateFin|date('d-m-y') }}</td>
+                <td>{{ formation.prix }}</td>
+
+                <td><a href="{{ path('ModifierFor',{'id':formation.id}) }}">Modifier</a></td>
+                <td><a href="{{ path('SupprimerFor',{'id':formation.id}) }}">Supprimer</a></td>
+            </tr>
+
+            </tbody>
+            {% endfor %}
+        </table>
+
+    </div><!-- table-responsive -->
+
+
+
+{% endblock %}

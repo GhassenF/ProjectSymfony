@@ -1,0 +1,136 @@
+back_homepage:
+    path:     /
+    defaults: { _controller: BackBundle:Default:index }
+
+
+
+tn_claim:
+    resource: "@BackBundle/Resources/config/routing/claim.yml"
+    prefix:   /claim
+
+navAddBackEvent:
+    path:    /admineventadd
+    defaults: { _controller: BackBundle:BackEvent:addTechEvent }
+
+navListBackEvent:
+    path:    /admineventlist
+    defaults: { _controller: BackBundle:BackEvent:listeEventBack }
+
+navDeleteBackEvent:
+    path:    /admindelete
+    defaults: { _controller: BackBundle:BackEvent:backDeleteEvent }
+
+navUpdateBackEvent:
+    path:    /admineventup
+    defaults: { _controller: BackBundle:BackEvent:updateBackEvent }
+
+navDeletePart:
+    path:    /admindeletepart
+    defaults: { _controller: BackBundle:BackEvent:partDelete }
+
+navListePart:
+    path:    /adminlisteepart
+    defaults: { _controller: BackBundle:BackEvent:listePartBack }
+
+ajax_search:
+    path:     /search
+    defaults: { _controller: BackBundle:ClaimevBack:search }
+
+
+
+test:
+    path:     /go
+    defaults: { _controller: BackBundle:Default:go }
+listeLinda:
+    path:     /liste
+    defaults: { _controller: BackBundle:FormationBack:listeFor }
+ModifierFor:
+    path: /Modifier
+    defaults: { _controller: BackBundle:FormationBack:modifierFor }
+SupprimerFor:
+    path: /Supprimer
+    defaults: { _controller: BackBundle:FormationBack:supprimerFor }
+
+
+
+
+
+
+
+
+
+
+
+espaceAjout:
+    path:     /ajoutArticle
+    defaults: { _controller: BackBundle:ArticleBack:addArticle }
+tableBasic:
+    path:     /tableDebase
+    defaults: { _controller: BackBundle:ArticleBack:afficher }
+deleteArticle:
+    path: /delete
+    defaults: { _controller: BackBundle:ArticleBack:delete }
+updateArticle:
+    path: /updateArtic
+    defaults: { _controller: BackBundle:ArticleBack:update }
+
+tableBasicmj:
+    path: /incrnbrvue
+    defaults: { _controller: BackBundle:ArticleBack:incrementNbrVue }
+heaven_tn_claim:
+    resource: "@BackBundle/Resources/config/routing/claim.yml"
+    prefix:   /claim
+
+navAddArticle:
+    path: /addArticle
+    defaults: { _controller: BackBundle:ArticleBack:addArticle }
+
+archiverArticle:
+    path: /archiverArt
+    defaults: { _controller: BackBundle:ArticleBack:archiverArticle }
+tablearchive:
+    path:     /tablearchive
+    defaults: { _controller: BackBundle:ArticleBack:afficherArchive }
+statgen:
+    path:     /statgener
+    defaults: { _controller: BackBundle:ArticleBack:afficherStatGen }
+pdfviw:
+    path:     /pdfv
+    defaults: { _controller: BackBundle:ArticleBack:pdf }
+
+
+ajouteractualite:
+    path:     /addact
+    defaults: { _controller: BackBundle:Actualiteback:ajouteract }
+ajoutercategorie:
+    path:     /addcat
+    defaults: { _controller: BackBundle:Actualiteback:ajoutercateg }
+afficherallactualite:
+    path:    /allactualite
+    defaults: { _controller: BackBundle:Actualiteback:affichallact }
+supprimeractualt:
+    path:     /supprimerActualite/{id}
+    defaults: { _controller: BackBundle:Actualiteback:supprimeract }
+
+modifieractualt:
+    path:     /modifierActualite/{id}
+    defaults: { _controller: BackBundle:Actualiteback:modifieract }
+
+suppcateg:
+    path:  /supprimerCategorie/{id}
+    defaults: { _controller: BackBundle:Actualiteback:supprimercat }
+afficheradminactualite:
+    path: /affiche
+    defaults: { _controller: BackBundle:Actualiteback:affadminactualite }
+consultactualite:
+    path: /consulteractualite/{id}
+    defaults: { _controller: BackBundle:Actualiteback:consulteract }
+ArchiverActualite:
+    path: /ArchiverActualite/{id}
+    defaults: { _controller: BackBundle:Actualiteback:archiveract }
+listactualitearchiver:
+    path: /listdesArchive
+    defaults: { _controller: BackBundle:Actualiteback:listarchiveact }
+ajax_searchingwael:
+    path:     /searchg
+    defaults: { _controller: BackBundle:Actualiteback:search }

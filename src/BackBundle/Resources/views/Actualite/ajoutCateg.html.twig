@@ -1,0 +1,46 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+
+    <h1 class="card-title mt-2">Creation d'une nouvelle Categories </h1>
+    <div class="col-sm-12 col-md-6">
+    {{ form_start(Form) }}
+
+        <div class="form-group">
+            <label for="inputname" class="control-label col-form-label">Categorie Nom : </label>
+            {{ form_widget(Form.name,{'attr':{'class':'form-control'}} ) }}
+
+
+    <div class="buttons">
+    <div class="pull-right">
+        <input type="submit" value="Ajouter" class="btn btn-info btn-rounded m-t-10 mb-2 float-right" />
+    </div>
+    </div>
+    </div>
+    </div>
+    {{ form_end(Form) }}
+
+
+    <h1 class="card-title mt-2">Liste des Categories disponible </h1>
+    <table class="table table-bordered table-colored table-dark">
+    <thead>
+    <tr>
+        <th class="wd-10p">ID</th>
+        <th class="wd-35p">Name</th>
+        <th class="wd-35p">Outil</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for categorie in Category %}
+    <tr>
+        <th scope="row">{{ categorie.id }}</th>
+        <td>{{ categorie.name }}</td>
+      <td>  <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" >   <a href="{{ path('suppcateg',{'id':categorie.id } ) }}"style="color: white"> Supprimer </a></button> </td>
+
+    </tr>
+{% endfor %}
+
+    </tbody>
+    </table>
+
+{% endblock %}

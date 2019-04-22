@@ -1,0 +1,57 @@
+{% extends "default/front.html.twig" %}
+{% block container %}
+    <section class="section-wrap pb-30">
+        <div class="container">
+            <div class="row">
+
+                {% for a in article %}
+                <div class="col-md-8 blog__content mb-30">
+                    <h1 class="page-title">Article</h1>
+
+                    <div class="row mt-30">
+
+                        <div class="col-md-6">
+                            <article class="entry">
+                                <div class="entry__img-holder">
+                                    <a href="{{ path('articleDetails', { 'id': a.identifiant }) }}">
+                                        <div class="thumb-container">
+                                            {{ a.auteur }}
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="entry__body">
+                                    <div class="entry__header">
+                                        {{ a.journal }}
+                                        <h2 class="entry__title">
+                                            {{ a.titre }}
+                                        </h2>
+                                        <ul class="entry__meta">
+                                            <li class="entry__meta-date">
+                                                {{ a.date|date }}
+                                            </li>
+                                            <li class="entry__meta-author">
+                                               {{ a.IdentifiantUser }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="entry__excerpt">
+
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+{% endblock %}

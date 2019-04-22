@@ -1,0 +1,42 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div style="background-image: url('{{ asset('img/computer-programming-source-code-uhd-4k-wallpaper.jpg')}}')">
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    {% if csrf_token %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% endif %}
+    <!-- vendor css -->
+
+    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+
+    <!-- Bracket CSS -->
+    <link rel="stylesheet" href="../css/bracket.css">
+    </head>
+    <!--div class="d-flex align-items-center justify-content-center bg-br-primary ht-100v"-->
+
+    <center>
+        <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white rounded shadow-base">
+            <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><span class="tx-normal">[</span> TechEvents<span class="tx-normal">]</span></div>
+            <div class="tx-center mg-b-60">Création de votre </div>
+            <div class="form-group">
+                <label for="username">{{ 'security.login.username'|trans }}</label>
+                <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
+            </div>
+            <div class="form-group">
+                <label for="password">{{ 'security.login.password'|trans }}</label>
+                <input type="password" class="form-control" id="password" name="_password" required="required" autocomplete="current-password" />
+            </div>
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+            <input type="submit" class="btn btn-info btn-block" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+        </div><!-- login-wrapper -->
+        <!--/div--><!-- d-flex -->
+    </center>
+</form>
+    </div>

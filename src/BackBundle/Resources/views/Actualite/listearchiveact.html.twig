@@ -1,0 +1,51 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+    <center>
+    <div class="section-title-wrap">
+        <h3 class="card-title mt-2">Actualités Archivés des Etablissement </h3>
+    </div>
+    </center>
+
+    <div class="row">
+        {% for actualite in Actualite %}
+            <div class="col-md-4 col-sm-6">
+                <article class="entry">
+                    <div class="entry__header">
+                        <h2 class="entry__title">
+                            <a href="#">{{ actualite.titre }}</a>
+                        </h2>
+                    </div>
+                    <div class="entry__img-holder">
+                        <a href="#">
+                            <div class="thumb-container">
+                                <img data-src="{{ asset('img/' ~ actualite.pictures) }}" src="{{ asset('img/' ~ actualite.pictures) }}" class="entry__img lazyload" alt="" width="290px" height="207px"/>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="entry__body">
+                        <div class="entry__header">
+                            <a href="#" class="entry__meta-category">{{ actualite.categories }}</a>
+                            <ul class="entry__meta">
+                                <li class="entry__meta-date">
+                                    {{ actualite.date|date('Y-m-d') }}
+                                </li>
+                                <li class="entry-author__name">
+                                    {{ actualite.user }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="entry__excerpt">
+                            <p>{{ actualite.description }}</p>
+                        </div>
+
+                            <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" >   <a href="{{ path('supprimeractualt',{'id':actualite.id } ) }}"style="color: white"> Supprimer </a></button>
+
+                        </td>
+                    </div>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

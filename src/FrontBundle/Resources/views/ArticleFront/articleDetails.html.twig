@@ -1,0 +1,99 @@
+{% extends "default/front.html.twig" %}
+{% block container %}
+
+    <script src=" {{ asset ('//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js')}} "> </script>
+
+    <script>
+        if (annyang) {
+            var commands = {
+                ' okay': function() {   console.log("test");  }
+            };
+            annyang.addCallback('result', function(userSaid, commandText, phrases) {
+                console.log(userSaid); // sample output: 'hello'
+                console.log(commandText); // sample output: 'hello (there)'
+                console.log(phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
+                if(userSaid[0]!= " okay") {
+                    console.log(userSaid[0]);
+                    console.log(userSaid[0]!== 'okay');
+                    document.getElementById('comment').value = userSaid[0];
+                }
+            });
+            annyang.addCommands(commands);
+            annyang.start();
+        }
+    </script>
+
+<h1>Journal: {{ art.journal }}</h1>
+    <h2>Titre: {{ art.titre }}</h2>
+    <h3>Auteur: {{ art.auteur }}</h3>
+    <h4>Date: {{ art.date|date }}</h4>
+
+    <div class="entry-comments mt-30">
+
+        <h5 class="entry-comments__title">{{ review|length }} Comments</h5>
+    {% for c in review %}
+
+        <ul class="comment-list" id="com">
+            <li class="comment">
+                <div class="comment-body" >
+                    <div class="comment-avatar">
+                        <img alt="" src="{{ asset('img/blog/GH.jpg') }}" height="40px" width="60px">
+                    </div>
+                    <div class="comment-text">
+                        <h6 class="comment-author">{{ c.idUser }}</h6>
+                        <div class="comment-metadata">
+                            <a href="#" class="comment-date">{{ c.date|date('Y-m-d') }}</a>
+                        </div>
+                        <p>{{ c.description }}</p>
+                        {% if app.user == c.idUser %}
+                        <a href="{{ path('deleteComment',{'id':art.identifiant}) }}" class="comment-reply">Supprimer</a>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+
+{% endfor %}
+
+        <a class="btn btn-large btn-success"  id="btn1">
+            <i class="fa fa-edit"></i>cacher les commentaires</a>
+        <a class="btn btn-large btn-success"  id="btn2">
+            <i class="fa fa-edit"></i>Afficher les commentaires</a>
+
+
+        <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
+        <script>
+            $('#btn1').click(
+                function () {
+                    $('li').hide();
+
+                });
+            $('#btn2').click(
+                function () {
+                    $('li').show();
+                });
+
+        </script>
+
+    <!-- Comment Form -->
+        {% if is_granted("ROLE_ETAB") or is_granted("ROLE_USER") %}
+    <div id="respond" class="comment-respond">
+        <h5 class="comment-respond__title">Mettez votre Commentaire ici !</h5>
+        <form id="form" class="comment-form" method="POST" >
+            <p class="comment-form-comment">
+                <textarea id="comment" name="comment" rows="5" required></textarea>
+            </p>
+
+                <button type="submit" class="btn btn-lg btn-color btn-button"  >Commenter</button>
+
+        </form>
+    </div> <!-- end comment form -->
+{% endif %}
+    </div>
+
+{% endblock %}

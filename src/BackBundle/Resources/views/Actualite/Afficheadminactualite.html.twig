@@ -1,0 +1,122 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+    <center>
+<div class="section-title-wrap">
+    <h3 class="card-title mt-2">Vos derniers Actualités</h3>
+</div>
+    </center>
+    <center>
+
+        <div class="row">
+    <h2> Chercher : </h2>
+
+    <div class="sidebar-search">
+
+        <div class="input-group custom-search-form">
+
+            <input type="text" id="search" class="form-control" placeholder="Chercher Actualité">
+        </div>
+        <!-- /input-group -->
+    </div>
+    <ul class="nav" id="side-menu">
+        <li>
+            <a href="#"> Entities<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level" id="entitiesNav">
+            </ul>
+        </li>
+    </ul><br><br><br><br>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('ajax_searchingwael') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'actualite') {
+                                            if (id !== 'error') {
+                                                console.log(value[1]);
+                                                entitySelector.append('<li><b>'+value[1]+'</b><a href="http://localhost/brainiacsweb/web/app_dev.php/back/consulteractualite/'+id+'"> </a> </li>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+        </div>
+    </center>
+
+
+<div class="row">
+    {% for actualite in Actualite %}
+    <div class="col-md-4 col-sm-6">
+        <article class="entry">
+            <div class="entry__header">
+                <h2 class="entry__title">
+                    <a href="#">{{ actualite.titre }}</a>
+                </h2>
+            </div>
+            <div class="entry__img-holder">
+                <a href="#">
+                    <div class="thumb-container">
+                        <img data-src="{{ asset('img/' ~ actualite.pictures) }}" src="{{ asset('img/' ~ actualite.pictures) }}" class="entry__img lazyload" alt="" width="290px" height="207px"/>
+                    </div>
+                </a>
+            </div>
+
+            <div class="entry__body">
+                <div class="entry__header">
+                    <a href="#" class="entry__meta-category">{{ actualite.categories }}</a>
+                    <ul class="entry__meta">
+                        <li class="entry__meta-date">
+                            {{ actualite.date|date('Y-m-d') }}
+                        </li>
+                        <li class="entry-author__name">
+                            {{ actualite.user }}
+                        </li>
+                        <li  class="entry-author__name" style="color: #8a1f11">
+                            {{ actualite.nbrelike }} Likes
+                        </li>
+                    </ul>
+                </div>
+                <div class="entry__excerpt" style="color: black">
+                    <p>{{ actualite.description }}</p>
+                </div>
+                <td><button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" >   <a href="{{ path('modifieractualt',{'id':actualite.id } ) }}" style="color: white"> Modifier </a></button>
+                    <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" >   <a href="{{ path('supprimeractualt',{'id':actualite.id } ) }}"style="color: white"> Supprimer </a></button>
+                    <button class="btn btn-info btn-rounded m-t-10 mb-2 float-right" data-target="#add-contact" data-toggle="modal" type="button" style="float:none!important;display:inline;" >   <a href="{{ path('consultactualite',{'id':actualite.id } ) }}" style="color: white"> Consulter </a></button>
+                </td>
+            </div>
+        </article>
+    </div>
+    {% endfor %}
+
+</div>
+
+    {% endblock %}

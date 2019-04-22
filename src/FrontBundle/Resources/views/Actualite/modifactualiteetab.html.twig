@@ -1,0 +1,57 @@
+{% extends "default/front.html.twig" %}
+{% block container %}
+
+    <section class="section-wrap pt-60 pb-20">
+    <div class="container">
+    <div class="row">
+
+        <!-- post content -->
+        <div class="col-md-8 blog__content mb-30">
+            <h3 class="card-title mt-2">Modifier Votre Actualité</h3>
+
+
+
+
+    {{ form_start(form) }}
+
+
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label for="inputname" class="control-label col-form-label">Titre</label>
+                        {{ form_widget(form.titre,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label for="inputname" class="control-label col-form-label">Categorie</label>
+                        {{ form_widget(form.categories,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label for="inputname" class="control-label col-form-label">Description</label>
+                        {{ form_widget(form.description,{'attr':{'class':'form-control'}} ) }}
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+            <div class="buttons">
+                <div class="pull-right">
+                    <input type="submit" value="Modifier" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div></div>
+         </div>
+    </section>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

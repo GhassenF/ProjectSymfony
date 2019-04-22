@@ -1,0 +1,50 @@
+{% extends "default/back.html.twig" %}
+{% block container %}
+
+
+
+    <!-- standard post -->
+    <center></center>
+    <article class="entry">
+        {% for actualite in Actualite %}
+
+
+
+            <div class="single-post__entry-header  entry__header">
+
+                <h1 class="card-title mt-2">
+                    {{ actualite.titre }}
+                </h1>
+
+                <ul class="single-post__entry-meta entry__meta">
+                   <a class="entry-author__url" >
+                    <li>
+                                <span>publié par : </span>
+                                <span class="entry-author__name">{{ actualite.user }}</span>
+                    </li>
+                   </a>
+                    <li class="entry__meta-date">
+                        <span>date de publication : </span>
+                       <span> {{ actualite.date|date('Y-m-d') }} </span>
+                    </li>
+                    <li>
+                        <span>Catégorie : </span>
+                        <span>  <a href="#" class="entry__meta-category">{{ actualite.categories }}</a></span>
+                    </li>
+                </ul>
+            </div>
+
+        <div class="entry__img-holder">
+            <figure>
+                <img src="{{ asset('img/' ~ actualite.pictures) }}" alt="" class="entry__img">
+            </figure>
+        </div>
+
+            <div class="entry__article">
+                <p>{{ actualite.description }}</p>
+            </div>
+        {% endfor %}
+    </article>
+    </center>
+
+{% endblock %}

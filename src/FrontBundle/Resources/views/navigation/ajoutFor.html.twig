@@ -1,0 +1,62 @@
+{% extends "default/front.html.twig" %}
+{% block container %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- Contact -->
+    <section class="section-wrap pt-40 pb-40">
+        <div class="container">
+
+            <h1 class="page-title" style="margin-left: 150px; color: #3E7087;">Formulaire d'ajout </h1>
+            <!--img data-src="img/blog/contact_page_title.jpg" src="img/blog/contact_page_title.jpg" alt="" class="lazyload contact__img"-->
+
+
+            <!-- Contact Form -->
+
+            <div class="contact-name">
+                {{ form_start(form) }}
+                <label for="titre">Titre <abbr title="required" class="required">*</abbr></label>
+                {{ form_widget(form.titre) }}
+            </div>
+
+            <div class="nom-etablissement">
+                <label for="etablissement">Etablissement <abbr title="required" class="required">*</abbr></label>
+                {{ form_widget(form.etablissement) }}
+            </div>
+            <div class="contact-message">
+                <label for="description">Description <abbr title="required" class="required">*</abbr></label>
+
+                {{ form_widget(form.description) }}
+            </div>
+            <!--div class="contact-email">
+                <label for="email">Email <abbr title="required" class="required">*</abbr></label>
+                <input name="email" id="email" type="email">
+            </div-->
+            <div class="contact-subject">
+                <label for="date_debut">Date de début</label>
+                {{ form_widget(form.dateDebut) }}
+            </div>
+            <div class="contact-datefin">
+                <label for="date_fin">Date de fin</label>
+                {{ form_widget(form.dateFin) }}
+            </div>
+            <form id="contact-form" class="contact-form mt-30 mb-30" method="post" action="#">
+                <div class="prix-for">
+                    <label for="prix">Prix </label>
+                    {{ form_widget(form.prix) }}
+                </div>
+
+                <div class="row justify-content-md-center">
+                    <div class="col-lg-8">
+                        <p>Merci de vérifier vos champs avant de valider. </p>
+                    </div>
+                </div>
+                {{ form_widget(form.save, { 'label': 'Valider' }) }}
+
+
+                {{ form_end(form) }}
+
+        </div>
+
+    </section> <!-- end contact -->
+{% endblock %}
